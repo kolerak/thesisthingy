@@ -90,11 +90,11 @@ const MAI_SS = {
     description: "Knowing about, what, or that. Knowledge of one's skills, intellectual resources, and abilities as a learner.",
   },
   "Procedural K.": {
-    items: [3,14,27,33,35], max: 5, color: "#8b5cf6", category: "Knowledge",
+    items: [3,14,27,33], max: 4, color: "#8b5cf6", category: "Knowledge",
     description: "Knowledge about how to implement learning procedures (e.g. strategies). Requires knowing the process and when to apply it.",
   },
   "Conditional K.": {
-    items: [15,18,26,29], max: 4, color: "#a78bfa", category: "Knowledge",
+    items: [15,18,26,29,35], max: 5, color: "#a78bfa", category: "Knowledge",
     description: "Knowledge about when and why to use learning procedures. Application of declarative and procedural knowledge under specific conditions.",
   },
   "Planning": {
@@ -229,8 +229,8 @@ const VDESC = {
   email:      "Email address optional",
   order_only: "Data collection mode: 0=Rated 1-7, 1=Order only no ratings given",
   mai_self_decl: "Participant self-reported Declarative K. score (scoring guide p.4, max 8)",
-  mai_self_proc: "Participant self-reported Procedural K. score (scoring guide p.4-5, max 5)",
-  mai_self_cond: "Participant self-reported Conditional K. score (scoring guide p.4-5, max 4)",
+  mai_self_proc: "Participant self-reported Procedural K. score (scoring guide p.4-5, max 4)",
+  mai_self_cond: "Participant self-reported Conditional K. score (scoring guide p.4-5, max 5)",
   mai_self_plan: "Participant self-reported Planning score (scoring guide p.5, max 7)",
   mai_self_info: "Participant self-reported Info Management score (scoring guide p.5-6, max 10)",
   mai_self_comp: "Participant self-reported Comprehension Monitoring score (scoring guide p.5-6, max 7)",
@@ -850,8 +850,8 @@ export default function App() {
                 <div style={{fontSize:10,color:"#475569",marginBottom:12}}>Factual knowledge the learner needs before being able to process or use critical thinking.</div>
                 {[
                   {label:"Declarative Knowledge",  color:"#6366f1",desc:"Knowing about, what, or that. Knowledge of one's skills, intellectual resources, and abilities as a learner.",ssItems:[5,10,12,16,17,20,32,46],max:8},
-                  {label:"Procedural Knowledge",   color:"#8b5cf6",desc:"Knowledge about how to implement learning procedures (e.g. strategies). Requires knowing the process and when to apply it.",ssItems:[3,14,27,33,35],max:5},
-                  {label:"Conditional Knowledge",  color:"#a78bfa",desc:"Knowledge about when and why to use learning procedures. Application of declarative and procedural knowledge under specific conditions.",ssItems:[15,18,26,29],max:4},
+                  {label:"Procedural Knowledge",   color:"#8b5cf6",desc:"Knowledge about how to implement learning procedures (e.g. strategies). Requires knowing the process and when to apply it.",ssItems:[3,14,27,33],max:4},
+                  {label:"Conditional Knowledge",  color:"#a78bfa",desc:"Knowledge about when and why to use learning procedures. Application of declarative and procedural knowledge under specific conditions.",ssItems:[15,18,26,29,35],max:5},
                 ].map(({label,color,desc,ssItems,max})=>{
                   const auto=ssItems.reduce((a,n)=>a+(cur[mk(n)]===1?1:0),0);
                   const missing=ssItems.filter(n=>cur[mk(n)]===null).length;
@@ -980,8 +980,8 @@ export default function App() {
               {(()=>{
                 const pairs=[
                   ["mai_self_decl",[5,10,12,16,17,20,32,46],"Declarative K."],
-                  ["mai_self_proc",[3,14,27,33,35],"Procedural K."],
-                  ["mai_self_cond",[15,18,26,29],"Conditional K."],
+                  ["mai_self_proc",[3,14,27,33],"Procedural K."],
+                  ["mai_self_cond",[15,18,26,29,35],"Conditional K."],
                   ["mai_self_plan",[4,6,8,22,23,42,45],"Planning"],
                   ["mai_self_info",[9,13,30,31,37,39,41,43,47,48],"Info Management"],
                   ["mai_self_comp",[1,2,11,21,28,34,49],"Comprehension Mon."],
@@ -1011,8 +1011,8 @@ export default function App() {
                 <div style={{fontSize:12,fontWeight:800,color:"#6366f1",marginBottom:12}}>KNOWLEDGE OF COGNITION <span style={{fontSize:10,fontWeight:400,color:"#475569"}}>(max 17)</span></div>
                 {[
                   {sk:"mai_self_decl",label:"Declarative Knowledge",  color:"#6366f1",items:[5,10,12,16,17,20,32,46],max:8},
-                  {sk:"mai_self_proc",label:"Procedural Knowledge",   color:"#8b5cf6",items:[3,14,27,33,35],max:5},
-                  {sk:"mai_self_cond",label:"Conditional Knowledge",  color:"#a78bfa",items:[15,18,26,29],max:4},
+                  {sk:"mai_self_proc", label:"Procedural Knowledge",  color:"#8b5cf6", items:[3,14,27,33],     max:4},
+                  {sk:"mai_self_cond",label:"Conditional Knowledge",  color:"#a78bfa",items:[15,18,26,29,35],max:5},
                 ].map(({sk,label,color,items,max})=>{
                   const auto=items.reduce((a,n)=>a+(cur[mk(n)]===1?1:0),0);
                   const anyBlank=items.some(n=>cur[mk(n)]===null);
