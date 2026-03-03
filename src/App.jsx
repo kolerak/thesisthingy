@@ -32,7 +32,7 @@ const MAI_ITEMS = [
   /* 3  */ "I try to use strategies that have worked in the past.",
   /* 4  */ "I pace myself while learning in order to have enough time.",
   /* 5  */ "I understand my intellectual strengths and weaknesses.",
-  /* 6  */ "I think about what I really need to learn before I begin a task.",
+  /* 6  */ "I think about what I really need to learn before I begin a task",
   /* 7  */ "I know how well I did once I finish a test.",
   /* 8  */ "I set specific goals before I begin a task.",
   /* 9  */ "I slow down when I encounter important information.",
@@ -340,7 +340,7 @@ const buildPSPPStructure = (ps) => {
   }).join("\n");
   const s1M=S1.filter(q=>q.stage!=="M"), s2M=S2.filter(q=>q.stage!=="M"), s3M=S3.filter(q=>q.stage!=="M");
   const rwBlock = (meanItems, rankCount, prefix) => meanItems.map((q,qi)=>{
-    const qNum=parseInt(q.id.replace(/[^0-9]/g,"").replace(/^0+/,""))||qi+1;
+    const qNum=parseInt(q.id.split("_").pop().replace(/\D/g,""))||qi+1;
     const expr=Array.from({length:rankCount},(_,i)=>`(${rk(prefix,i+1)}=${qNum}) * ${rankCount-i}`).join(" + ");
     return `COMPUTE ${(q.id+"_rw").padEnd(18)}= ${expr}.\nVARIABLE LABELS ${(q.id+"_rw").padEnd(18)}'Rank weight ${q.id}'.`;
   }).join("\n");
@@ -372,16 +372,6 @@ MISSING VALUES
 MISSING VALUES\n    ${maiVars} (-9).
 MISSING VALUES\n    ${dilVars} (-9).
 MISSING VALUES\n    ${rankVars} (-9).
-EXECUTE.
-VARIABLE LABELS
-  mai_self_decl 'Participant self-reported Declarative K. score (max 8)'
-  mai_self_proc 'Participant self-reported Procedural K. score (max 5)'
-  mai_self_cond 'Participant self-reported Conditional K. score (max 4)'
-  mai_self_plan 'Participant self-reported Planning score (max 7)'
-  mai_self_info 'Participant self-reported Info Management score (max 10)'
-  mai_self_comp 'Participant self-reported Comprehension Monitoring score (max 7)'
-  mai_self_debu 'Participant self-reported Debugging Strategies score (max 5)'
-  mai_self_eval 'Participant self-reported Evaluation score (max 6)'.
 EXECUTE.
 * === MAI SUBSCALES ===
 ${subCalc}
@@ -750,7 +740,7 @@ export default function App() {
                 </div>
               </div>
               <div style={{padding:12,background:"#1e293b",borderRadius:9,fontSize:10,color:"#64748b",lineHeight:1.9,border:"1px solid #334155"}}>
-                <div><span style={{color:"#94a3b8",fontWeight:700}}>Variables per participant:</span> 135 (9 demo + 37 dilemma + 37 rank positions + 52 MAI)</div>
+                <div><span style={{color:"#94a3b8",fontWeight:700}}>Variables per participant:</span> 143 (14 demo + 37 dilemma + 37 rank positions + 3 order strings + 52 MAI)</div>
                 <div style={{marginTop:6,padding:"6px 10px",background:"#0f172a",borderRadius:6}}>
                   <span style={{color:"#7c3aed",fontWeight:700}}>PSPP workflow:</span> ⬇PSPP+Data → put both files in same folder → run <code style={{color:"#a78bfa"}}>thesis_pspp_structure.sps</code>
                 </div>
