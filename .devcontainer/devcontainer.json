@@ -1,0 +1,17 @@
+{
+  "name": "Thesis Entry App",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": {
+      "label": "Thesis App",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
+    }
+  }
+}
